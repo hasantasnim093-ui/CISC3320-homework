@@ -1,0 +1,8 @@
+# my own workload: staggered arrivals, an idle gap before P5, and one long job (P6)
+# pid, arrival, burst, priority
+P1,0,10,3
+P2,1,4,1
+P3,2,9,4
+P4,3,5,2
+P5,30,3,1
+P6,31,20,5
