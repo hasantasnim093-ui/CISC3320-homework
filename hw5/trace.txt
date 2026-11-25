@@ -1,0 +1,11 @@
+alloc A 200
+alloc B 300
+alloc C 150
+alloc D 100
+free B
+free D
+alloc E 280
+alloc F 100
+alloc G 260
+stats
+map
