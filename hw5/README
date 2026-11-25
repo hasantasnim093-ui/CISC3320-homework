@@ -1,0 +1,7 @@
+ Memory Allocator Simulator
+
+
+
+This is a heap allocator simulator over a fixed memory pool (default 1000 bytes) that only tracks metadata, not real bytes. Run it with `python3 allocator.py` (use `--size N` for a different pool and `--policy first|best|worst` to pick the placement policy), then type `alloc <name> <size>`, `free <name>`, `stats`, `map`, `policy <name>`, or `exit`. `python3 allocator.py --policy first < trace.txt` replays the lecture's nine-step trace, and `python3 test_allocator.py` runs all the tests (it should end with "all tests passed").
+
+Blocks are kept in one list sorted by address that always covers the whole pool; a hole is a block with no name, so a block's neighbors are just the entries next to it. First-fit takes the lowest-address hole that fits, best-fit the smallest, and worst-fit the largest, and ties go to the lowest address. Allocating splits the hole (an exact fit uses the whole hole, so no zero-size hole is left), and freeing merges the block with any free neighbor on either side. Errors (out of memory, unknown name, duplicate name, double free, bad size) print a message and leave the pool unchanged, and after every operation the code asserts that blocks do not overlap and used + free = pool size. Fragmentation is external fragmentation = (1 - largest hole / total free) x 100%, so 0% means all free space is one block. If the pool is full, `alloc` raises an error that PyShell should handle by failing that buffer instead of blocking the job.
